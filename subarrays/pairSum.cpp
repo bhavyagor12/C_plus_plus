@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// requires sorted array if sorting required then N logn
 bool pairSum(int arr[], int n, int targetSum) // O(n)
 {
     int low = 0;
