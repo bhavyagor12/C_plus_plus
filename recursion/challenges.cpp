@@ -52,6 +52,24 @@ int last_occurence(int arr[], int n, int i, int key)
     }
     return -1;
 }
+
+string keypadArr[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+void keypad(string s, string ans)
+{
+    if (s.length() == 0)
+    {
+        cout << ans << endl;
+        return;
+    }
+    char ch = s[0];
+    string code = keypadArr[ch - '0'];
+    string ros = s.substr(1);
+    for (int i = 0; i < code.length(); i++)
+    {
+        keypad(ros, ans + code[i]);
+    }
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -61,17 +79,19 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int n;
+    // int n;
 
-    cin >> n;
-    int arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+    // cin >> n;
+    // int arr[n];
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cin >> arr[i];
+    // }
     // cout << sorted(arr, n) << endl;
     // dec(n);
     // inc(n);
-    cout << first_occurence(arr, n, 0, 2) << endl;
-    cout << last_occurence(arr, n, 0, 2);
+    // cout << first_occurence(arr, n, 0, 2) << endl;
+    // cout << last_occurence(arr, n, 0, 2);
+
+    keypad("23", "");
 }
