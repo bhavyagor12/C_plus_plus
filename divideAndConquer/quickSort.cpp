@@ -52,7 +52,7 @@ int main()
     {
         cin >> array[i];
     }
-    quicksort(array, 0, n);
+    quicksort(array, 0, n - 1);
 
     for (int i = 0; i < n; i++)
     {
