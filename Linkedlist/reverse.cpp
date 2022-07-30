@@ -41,6 +41,29 @@ node *reverseRecursive(node *&head)
     head->next = NULL;
     return newHead;
 }
+
+node *reverseK(node *&head, int k)
+{
+    node *prevPtr = NULL;
+    node *currPtr = head;
+    node *nextPtr;
+    int count = 0;
+    while (currPtr != NULL && count < k)
+    {
+        nextPtr = currPtr->next;
+        currPtr->next = prevPtr;
+        prevPtr = currPtr;
+        currPtr = nextPtr;
+
+        count++;
+    } // k nodes
+
+    if (nextPtr != NULL)
+    {
+        head->next = reverseK(nextPtr, k);
+    }
+    return prevPtr;
+}
 void insertAtTail(node *&head, int val)
 {
 
@@ -85,6 +108,8 @@ int main()
     insertAtTail(head, 12);
     insertAtTail(head, 10);
     display(head);
-    node *newhead = reverseRecursive(head);
-    display(newhead);
+    // node *newhead = reverseRecursive(head);
+    int k = 2;
+    node *newHead = reverseK(head, k);
+    display(newHead);
 }
