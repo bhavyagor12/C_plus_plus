@@ -6,7 +6,6 @@ class node
 public:
     int data;
     node *next;
-
     node(int val)
     {
         data = val;
@@ -77,6 +76,10 @@ void search(node *head, int val)
     while (temp != NULL)
     {
         if (temp->data == val)
+            if (head->next == NULL)
+            {
+                node *todelete = head;
+            }
         {
             cout << "found at:" << temp;
             return;
@@ -84,6 +87,67 @@ void search(node *head, int val)
         temp = temp->next;
     }
     cout << "NOT PRESENT" << endl;
+}
+
+void deleteAtHead(node *&head)
+{
+    node *todelete = head;
+    head = head->next;
+    delete todelete;
+}
+
+void deletion(node *&head, int val)
+{
+    node *temp = head;
+    // corner case empty linked list
+    if (head == NULL)
+    {
+        return;
+    }
+    // only one node present
+    if (head->next == NULL)
+    {
+        deleteAtHead(head);
+        return;
+    }
+    while (temp->next->data != val)
+    {
+        temp = temp->next;
+    } // reach n-1th node
+    node *todelete = temp->next;
+    temp->next = temp->next->next;
+
+    delete todelete;
+}
+
+void insertAtPos(node *&head, int val, int pos)
+{
+    node *newNode = new node(val);
+    if (head == NULL)
+    {
+        cout << "Linked List is empty! cant insert at pos" << pos << endl;
+        return;
+    }
+    if (pos == 0)
+    {
+        insertAtBeginning(head, val);
+        return;
+    }
+    int count = 0;
+    node *temp = head;
+    while (count != pos - 1)
+    {
+        count++;
+        if (temp->next == NULL)
+        {
+            cout << "POSITION OUTSIDE OF LL" << endl;
+            return;
+        }
+        temp = temp->next;
+    }
+    node *temp1 = temp->next;
+    temp->next = newNode;
+    newNode->next = temp1;
 }
 
 int main()
@@ -94,7 +158,12 @@ int main()
     insertAtTail(head, 12);
     insertAtTail(head, 10);
     insertAtBeginning(head, 5);
-    search(head, 13);
+    display(head);
+    insertAtPos(head, 99, 5);
+    // search(head, 13);
+    display(head);
+    // deletion(head, 23);
+    // deleteAtHead(head);
     // display(head);
     return 0;
 }
