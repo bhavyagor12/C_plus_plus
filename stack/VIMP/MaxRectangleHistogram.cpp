@@ -38,7 +38,7 @@ int maxHistogram(vector<int> &heights)
         }
         if (st.empty())
         {
-            rightSmall[i] = 7;
+            rightSmall[i] = size;
         }
         else
         {
