@@ -12,7 +12,7 @@ int binarySearch(vector<int> &nums, int val)
         {
             return mid;
         }
-        else if (nums[mid] < val)
+        else if (nums[mid] > val)
         {
             low = mid + 1;
         }
@@ -26,9 +26,8 @@ int binarySearch(vector<int> &nums, int val)
 
 int main()
 {
-    vector<int> nums = {1, 5, 2, 3, 7, 4, 9, 6, 8};
-    sort(nums.begin(), nums.end());
-    int valToBeSearch = 4;
+    vector<int> nums = {20, 17, 15, 14, 13, 12, 10, 9, 8, 4};
+    int valToBeSearch = 15;
     cout << binarySearch(nums, valToBeSearch);
 
     return 0;
