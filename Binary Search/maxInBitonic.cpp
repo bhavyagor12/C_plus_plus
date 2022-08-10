@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-// same code for bitonic array max
-int findPeak(vector<int> &nums)
+
+int findMax(vector<int> &nums)
 {
     int size = nums.size();
     int low = 0, high = size - 1;
@@ -43,8 +43,8 @@ int findPeak(vector<int> &nums)
 
 int main()
 {
-    vector<int> nums = {1, 2};
-    cout << findPeak(nums) << endl;
+    vector<int> nums = {1, 3, 8, 12, 4, 2};
+    cout << findMax(nums) << endl;
 
     return 0;
 }
