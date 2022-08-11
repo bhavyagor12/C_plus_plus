@@ -6,6 +6,7 @@ int MaxAreaHisto(vector<int> &mattrix)
     int rightSmall[size], leftSmall[size];
     int result = INT_MIN;
     stack<int> st;
+    // left small
     for (int i = 0; i < size; i++)
     {
         while (!st.empty() && mattrix[st.top()] >= mattrix[i])
@@ -22,6 +23,11 @@ int MaxAreaHisto(vector<int> &mattrix)
         }
         st.push(i);
     }
+    for (int i = 0; i < size; i++)
+    {
+        cout << leftSmall[i] << " ";
+    }
+    cout << endl;
 
     while (!st.empty())
     {
@@ -45,6 +51,13 @@ int MaxAreaHisto(vector<int> &mattrix)
         }
         st.push(i);
     }
+    cout << endl;
+    for (int i = 0; i < size; i++)
+    {
+
+        cout << rightSmall[i] << " ";
+    }
+    cout << endl;
     for (int i = 0; i < size; i++)
     {
         result = max(result, (rightSmall[i] - leftSmall[i] - 1) * mattrix[i]);
@@ -76,7 +89,7 @@ int main()
         mattrix.push_back(arr[0][j]);
     }
     mx = MaxAreaHisto(mattrix);
-    cout << mx << endl;
+    // cout << mx << endl;
     for (int i = 1; i < n; i++)
     {
         for (int j = 0; j < m; j++)

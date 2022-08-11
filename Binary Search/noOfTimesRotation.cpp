@@ -41,7 +41,7 @@ int countRotations(vector<int> &nums)
 
 int main()
 {
-    vector<int> nums = {4, 5, 6, 0, 1, 2};
+    vector<int> nums = {3, 3, 3, 1};
     cout << countRotations(nums) << endl;
     // logic is the idx of the min ele is the amount of rotations
 
