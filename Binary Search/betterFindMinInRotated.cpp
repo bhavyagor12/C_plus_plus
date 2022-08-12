@@ -8,7 +8,7 @@ public:
         while (low < high)
         {
             int mid = low + (high - low) / 2;
-            if (nums[high] == nums[mid])
+            if (nums[high] == nums[mid]) // only for when array contains duplicates
             {
                 high = high - 1;
             }
