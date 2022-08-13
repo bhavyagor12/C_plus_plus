@@ -13,6 +13,7 @@ vector<int> frequentK(vector<int> &nums, int k)
     for (auto i = frequencyCount.begin(); i != frequencyCount.end(); i++)
     { // first is the number[1,2,3,4] second is the count
         // as we want to sort according to count we push second first
+        // as we have iterator we use arrow dot wont work
         minHeap.push({i->second, i->first});
         if (minHeap.size() > k)
         {
