@@ -19,7 +19,7 @@ int multiply(int n, int p)
 }
 int factorial(int n)
 {
-    if (n == 0 || n == 1 || n == 2)
+    if (n == 1 || n == 2)
         return n;
     int value = factorial(n - 1);
     return n * value;
@@ -40,6 +40,6 @@ int main()
     cin >> n;
     // cout << sum(n) << endl;
     // cout << multiply(n, p) << endl;
-    // cout << factorial(n) << endl;
-    cout << fibonnaci(n) << endl;
+    cout << factorial(n) << endl;
+    // cout << fibonnaci(n) << endl;
 }

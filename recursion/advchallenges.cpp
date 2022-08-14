@@ -49,7 +49,7 @@ int countPathMaze(int n, int i, int j)
 
     return countPathMaze(n, i + 1, j) + countPathMaze(n, i, j + 1);
 }
-
+rraySort(arr[N - 1]);
 int tilingProblem(int n)
 {
     if (n == 1)
