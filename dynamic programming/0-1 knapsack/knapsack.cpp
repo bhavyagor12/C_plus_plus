@@ -1,9 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-int DP[102][1002]; // dp matrix made on what changes
-// here we see that n -- size of array and capacity are changing
-// hence we make matrix of that size
-int knapSack(int val[], int wt[], int n, int capacity) // recursive + memo
+int knapSackRecursive(int val[], int wt[], int n, int capacity)
+{
+    // base condition
+    //  we know that when array size is 0 or there is 0 capacity
+    //  we have no profit
+    if (n == 0 || capacity == 0)
+    {
+        return 0;
+    }
+
+    // choice diagram
+    if (wt[n - 1] <= capacity)
+    {
+        return max(val[n - 1] + knapSackRecursive(val, wt, n - 1, capacity - wt[n - 1]), knapSackRecursive(val, wt, n - 1, capacity));
+    }
+    else
+    {
+        return knapSackRecursive(val, wt, n - 1, capacity);
+    }
+}
+int DP[100][1002];
+int knapSackMemo(int val[], int wt[], int n, int capacity)
 {
     if (n == 0 || capacity == 0)
     {
@@ -13,27 +31,26 @@ int knapSack(int val[], int wt[], int n, int capacity) // recursive + memo
     {
         return DP[n][capacity];
     }
+    // choice diagram
     if (wt[n - 1] <= capacity)
     {
-        // therefore we can include or no;
-        return DP[n][capacity] = max(val[n - 1] + knapSack(val, wt, n - 1, capacity - wt[n - 1]), knapSack(val, wt, n - 1, capacity));
+        return DP[n][capacity] = max(val[n - 1] + knapSackMemo(val, wt, n - 1, capacity - wt[n - 1]), knapSackMemo(val, wt, n - 1, capacity));
     }
     else
     {
-        // here weight of the item is greater than capacity
-        // so we cant include
-        return DP[n][capacity] = knapSack(val, wt, n - 1, capacity);
+        return DP[n][capacity] = knapSackMemo(val, wt, n - 1, capacity);
     }
 }
-
 int knapSackTabulation(int val[], int wt[], int n, int capacity)
 {
     int dp[n + 1][capacity + 1];
-    // now step is of initialization
+
+    // base conditon(initialization)
     for (int i = 0; i < n + 1; i++)
     {
         for (int j = 0; j < capacity + 1; j++)
         {
+            // change n with i
             if (i == 0 || j == 0)
             {
                 dp[i][j] = 0;
@@ -41,22 +58,19 @@ int knapSackTabulation(int val[], int wt[], int n, int capacity)
         }
     }
 
-    // choice diagram
+    // choice diagram -- change n with i and capacity with k
     for (int i = 1; i < n + 1; i++)
     {
         for (int j = 1; j < capacity + 1; j++)
         {
             if (wt[i - 1] <= j)
             {
-                // we can include the weight
-                dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], 0 + dp[i - 1][j]);
-                // replace places where recursive call was done with matrix
-                // replace n with i, capacity with j;
+                dp[i][j] = max(val[i - 1] + dp[i - 1][j - wt[i - 1]], dp[i - 1][j]);
             }
             else
             {
                 // wt[i-1] > j
-                dp[i][j] = 0 + dp[i - 1][j];
+                dp[i][j] = dp[i - 1][j];
             }
         }
     }
@@ -68,6 +82,7 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
+
     int n;
     cin >> n;
     int capacity;
@@ -82,7 +97,13 @@ int main()
         cin >> val[i];
     }
     memset(DP, -1, sizeof(DP));
-    int maxProfit = knapSackTabulation(val, wt, n, capacity);
-    cout << maxProfit;
+
+    int maxProfitRecursive = knapSackRecursive(val, wt, n, capacity);
+    int maxProfitMemo = knapSackMemo(val, wt, n, capacity);
+    int maxProfitTabu = knapSackTabulation(val, wt, n, capacity);
+
+    cout << maxProfitRecursive << endl;
+    cout << maxProfitMemo << endl;
+    cout << maxProfitTabu << endl;
     return 0;
 }
