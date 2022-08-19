@@ -1,21 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
+int DP[102][1002];
 int knapSack(int val[], int wt[], int n, int capacity)
 {
     if (n == 0 || capacity == 0)
     {
         return 0;
     }
+    if (DP[n][capacity] != -1)
+    {
+        return DP[n][capacity];
+    }
     if (wt[n - 1] <= capacity)
     {
         // therefore we can include or no;
-        return max(val[n - 1] + knapSack(val, wt, n - 1, capacity - wt[n - 1]), knapSack(val, wt, n - 1, capacity));
+        return DP[n][capacity] = max(val[n - 1] + knapSack(val, wt, n - 1, capacity - wt[n - 1]), knapSack(val, wt, n - 1, capacity));
     }
     else
     {
         // here weight of the item is greater than capacity
         // so we cant include
-        return knapSack(val, wt, n - 1, capacity);
+        return DP[n][capacity] = knapSack(val, wt, n - 1, capacity);
     }
 }
 int main()
@@ -37,6 +42,7 @@ int main()
     {
         cin >> val[i];
     }
+    memset(DP, -1, sizeof(DP));
     int maxProfit = knapSack(val, wt, n, capacity);
     cout << maxProfit;
     return 0;
