@@ -1,5 +1,6 @@
 // Leetcode Question 494
 // same problem as the countSubsetWithGivenDiff
+
 #include <bits/stdc++.h>
 using namespace std;
 int countSubsets(int arr[], int n, int sum)
@@ -21,16 +22,18 @@ int countSubsets(int arr[], int n, int sum)
     }
     for (int i = 1; i < n + 1; i++)
     {
-        for (int j = 1; j < sum + 1; j++)
+        for (int j = 0; j < sum + 1; j++)
         {
+            // this starts from zero to tackle case where there are multiple occurences of 0s
+
             if (arr[i - 1] <= j)
             {
                 dp[i][j] = dp[i - 1][j] + dp[i - 1][j - arr[i - 1]];
             }
             else
             {
-                dp[i][j] = dcout << sumOfArrayEle << endl;
-                p[i - 1][j];
+                dp[i][j] =
+                    dp[i - 1][j];
             }
         }
     }
@@ -38,10 +41,18 @@ int countSubsets(int arr[], int n, int sum)
 }
 int findTargetSum(int arr[], int n, int sum)
 {
+    sum = abs(sum);
+    // this is needed if the array sum (target) is negative
     int sumOfArrayEle = 0;
     for (int i = 0; i < n; i++)
     {
         sumOfArrayEle += arr[i];
+    }
+    if (sumOfArrayEle < sum || (sumOfArrayEle + sum) % 2 != 0)
+    {
+        // here if the target is greater than our current sum than we cant make it
+        // the next case is for when we have odd target value than its not possible
+        return 0;
     }
     int sum1Partition = (sumOfArrayEle + sum) / 2;
     int count = countSubsets(arr, n, sum1Partition);
