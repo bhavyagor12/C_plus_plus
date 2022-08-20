@@ -33,9 +33,17 @@ void subsetSum(int arr[], int n, int range, vector<int> &validSums)
             }
         }
     }
+    for (int i = 0; i < n + 1; i++)
+    {
+        for (int j = 0; j < range + 1; j++)
+        {
+            cout << dp[i][j] << " ";
+        }
+        cout << endl;
+    }
     // since we need to store till only half of range
     int halfOfRange = (range + 1) / 2;
-    for (int j = 0; j < halfOfRange; j++)
+    for (int j = 0; j <= halfOfRange; j++)
     {
         if (dp[n][j] == true)
         {
