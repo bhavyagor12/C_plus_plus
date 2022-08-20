@@ -13,7 +13,6 @@ bool subsetSumRecursive(int arr[], int n, int sum)
     if (sum == 0)
     {
         return true;
-        1 1
     }
     if (arr[n - 1] <= sum)
     {
