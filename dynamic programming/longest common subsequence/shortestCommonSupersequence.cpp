@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int lcs(string &x, string &y, int n, int m)
+string lcs(string &x, string &y, int n, int m)
 {
     int dp[n + 1][m + 1];
     for (int i = 0; i < n + 1; i++)
@@ -28,7 +28,7 @@ int lcs(string &x, string &y, int n, int m)
     int i = n;
     int j = m;
     string ans = "";
-    while (i > 0 || j > 0)
+    while (i > 0 && j > 0)
     {
         if (x[i - 1] == y[j - 1])
         {
@@ -38,15 +38,28 @@ int lcs(string &x, string &y, int n, int m)
         }
         else if (dp[i - 1][j] < dp[i][j - 1])
         {
+            ans.push_back(y[j - 1]);
             j--;
         }
         else
         {
+            ans.push_back(x[i - 1]);
             i--;
         }
     }
+    while (i > 0)
+    {
+        ans.push_back(x[i - 1]);
+        i--;
+    }
+    while (j > 0)
+    {
+        ans.push_back(y[j - 1]);
+        j--;
+    }
+    reverse(ans.begin(), ans.end());
     cout << ans << endl;
-    return dp[n][m];
+    return ans;
 }
 int main()
 {
@@ -59,7 +72,8 @@ int main()
     cin >> x >> y;
     int n = x.size();
     int m = y.size();
-    int scSuperSequence = n + m - lcs(x, y, n, m);
+    string ans = lcs(x, y, n, m);
+    string scSuperSequence = x + y;
     cout << scSuperSequence;
     return 0;
 }

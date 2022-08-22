@@ -1,22 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-// this same code is also for insertions logic
-int lcs(string &y, string &x, int n)
+int lcs(string x, string y, int n, int m)
 {
-    int dp[n + 1][n + 1];
+    int dp[n + 1][m + 1];
     for (int i = 0; i < n + 1; i++)
     {
-        for (int j = 0; j < n + 1; j++)
+        for (int j = 0; j < m + 1; j++)
         {
             if (i == 0 || j == 0)
+            {
                 dp[i][j] = 0;
+            }
         }
     }
     for (int i = 1; i < n + 1; i++)
     {
         for (int j = 1; j < n + 1; j++)
         {
-            if (x[i - 1] == y[j - 1])
+            if (x[i - 1] == y[j - 1] && i != j)
             {
                 dp[i][j] = 1 + dp[i - 1][j - 1];
             }
@@ -26,7 +27,8 @@ int lcs(string &y, string &x, int n)
             }
         }
     }
-    return dp[n][n];
+
+    return dp[n][m];
 }
 int main()
 {
@@ -38,9 +40,10 @@ int main()
     cin >> x;
     int n = x.size();
     string y = x;
-    reverse(x.begin(), x.end());
-    int lps = lcs(y, x, n);
-    int deletions = n - lps;
-    cout << deletions << endl;
+    int m = y.size();
+    t m = y.size();
+    int ans = lcs(x, y, n, m);
+    cout << ans;
+
     return 0;
 }

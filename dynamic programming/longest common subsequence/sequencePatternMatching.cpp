@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-// this same code is also for insertions logic
-int lcs(string &y, string &x, int n)
+int lcs(string x, string y, int n, int m)
 {
-    int dp[n + 1][n + 1];
+    int dp[n + 1][m + 1];
     for (int i = 0; i < n + 1; i++)
     {
-        for (int j = 0; j < n + 1; j++)
+        for (int j = 0; j < m + 1; j++)
         {
             if (i == 0 || j == 0)
                 dp[i][j] = 0;
@@ -14,7 +13,7 @@ int lcs(string &y, string &x, int n)
     }
     for (int i = 1; i < n + 1; i++)
     {
-        for (int j = 1; j < n + 1; j++)
+        for (int j = 1; j < m + 1; j++)
         {
             if (x[i - 1] == y[j - 1])
             {
@@ -26,7 +25,7 @@ int lcs(string &y, string &x, int n)
             }
         }
     }
-    return dp[n][n];
+    return dp[n][m];
 }
 int main()
 {
@@ -34,13 +33,18 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    string x;
-    cin >> x;
+    string x, y;
+    cin >> x >> y;
     int n = x.size();
-    string y = x;
-    reverse(x.begin(), x.end());
-    int lps = lcs(y, x, n);
-    int deletions = n - lps;
-    cout << deletions << endl;
+    int m = y.size();
+    int countOfLcs = lcs(x, y, n, m);
+    if (countOfLcs == n)
+    {
+        cout << "true" << endl;
+    }
+    else
+    {
+        cout << "false" << endl;
+    }
     return 0;
 }
