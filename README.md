@@ -5,3 +5,4 @@ Playlist followed
 Stacks -- Aditya Verma 
 Heap -- Aditya Verma
 Binary Search -- Aditya Verma
+Dynamic Programming -- Aditya Verma
