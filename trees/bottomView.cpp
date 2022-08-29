@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-vector<int> TopView(TreeNode *root)
+// queue(node,level);
+// map(level,node->val);
+vector<int> BottomView(TreeNode *root)
 {
     vector<int> ans;
     if (root == NULL)
         return ans;
-
-    queue<pair<TreeNode *, int>> q;
     map<int, int> mp;
+    queue<pair<TreeNode *, int>> q;
     q.push({root, 0});
     while (!q.empty())
     {
@@ -16,8 +16,7 @@ vector<int> TopView(TreeNode *root)
         q.pop();
         TreeNode *node = p.first;
         int x = p.second;
-        if (mp.find(x) == mp.end()) // only insert if we dont have the key
-            mp[x].insert(node->val);
+        mp[x].insert(node->val);
         if (node->left)
         {
             q.push({node->left, x - 1});
