@@ -38,7 +38,7 @@ void addRightBoundary(TreeNode *root, vector<int> &res)
     }
     while (!st.empty())
     {
-        res.push_back(st.top()->data);
+        res.push_back(st.top());
         st.pop();
     }
 }
