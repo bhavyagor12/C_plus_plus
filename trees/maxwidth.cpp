@@ -1,37 +1,37 @@
 class Solution
 {
 public:
-    vector<double> averageOfLevels(TreeNode *root)
+    int widthOfBinaryTree(TreeNode *root)
     {
-        vector<double> ans;
         if (!root)
-            return ans;
-        queue<TreeNode *> q;
-        q.push(root);
+            return 0;
+        int ans = 0;
+        queue<pair<TreeNode *, int>> q;
+        q.push({root, 0});
         while (!q.empty())
         {
             int size = q.size();
-            vector<int> level;
+            int mIdx = q.front().second;
+            int firstIdx, lastIdx;
             for (int i = 0; i < size; i++)
             {
-                TreeNode *node = q.front();
+                long curr_idx = q.front().second - mIdx;
+                TreeNode *node = q.front().first;
                 q.pop();
+                if (i == 0)
+                    firstIdx = curr_idx;
+                if (i == size - 1)
+                    lastIdx = curr_idx;
                 if (node->left)
-                    q.push(node->left);
+                {
+                    q.push({node->left, curr_idx * 2 + 1});
+                }
                 if (node->right)
-                    q.push(node->right);
-                level.push_back(node->val);
+                {
+                    q.push({node->right, curr_idx * 2 + 2});
+                }
             }
-            double vecSize = level.size();
-            double sum = 0;
-            double avg;
-            for (int i = 0; i < vecSize; i++)
-            {
-                sum += level[i];
-            }
-
-            avg = sum / vecSize;
-            ans.push_back(avg);
+            ans = max(ans, (lastIdx - firstIdx + 1));
         }
         return ans;
     }
