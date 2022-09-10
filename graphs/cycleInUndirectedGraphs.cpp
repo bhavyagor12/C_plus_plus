@@ -1,44 +1,78 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool detect(int src, vector<int> adj[], int vis[])
+bool bfs(int node, vector<int> adjList[], int vis[])
 {
-    vis[src] = 1;
+    vis[node] = 1;
     queue<pair<int, int>> q;
-    q.push({src, -1});
+    q.push({node, -1}); // node and parent
     while (!q.empty())
     {
-        int node = q.front().first;
+        int src = q.front().first;
         int parent = q.front().second;
         q.pop();
-
-        for (auto adjNode : adj[node])
+        for (auto adjacentNode : adjList[node])
         {
-            if (!vis[adjNode])
+            if (!vis[adjacentNode])
             {
-                vis[adjNode] = 1;
-                q.push({adjNode, node});
+                vis[adjacentNode] = 1;
+                q.push({adjacentNode, src});
             }
-            else if (parent != adjNode)
+            else if (parent != adjacentNode)
+            {
+                return false;
+            }
+        }
+    }
+}
+
+bool dfs(int node, int parent, vector<int> adjList[], int vis[])
+{
+    vis[node] = 1;
+
+    for (auto adjacentNode : adjList[node])
+    {
+        if (!vis[adjacentNode])
+        {
+            if (dfs(adjacentNode, node, adjList, vis))
             {
                 return true;
             }
         }
+        else if (parent != adjacentNode)
+        {
+            it
+                it
+                    it
+                        it return true;
+        }
     }
+
     return false;
 }
 
-bool isCycle(int V, vector<int> adj)
+bool isCycle(vector<int> adjList[], int V)
 {
-    int vis[V] = {0};
+    int vis[V]; // visited array creation
+    // bfs for connected components
+    // for (int i = 0; i < V; i++)
+    // {
+    //     if (!vis[i])
+    //     {
+    //         if (bfs(i, adjList, vis))
+    //             return true;
+    //     }
+    // }
+
+    // dfs code
     for (int i = 0; i < V; i++)
     {
         if (!vis[i])
         {
-            if (detect(i, adj, vis))
+            // node,parent
+            if (dfs(i, -1, adjList, vis))
                 return true;
         }
     }
-
     return false;
 }
