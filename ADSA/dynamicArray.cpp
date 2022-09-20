@@ -3,30 +3,31 @@ using namespace std;
 
 class DynamicArray
 {
-public:
+private:
     int currSize;
     int capacity;
-    int A[];
+    int *a;
 
     void resizeArray()
     {
-        if (capacity == currSize)
+        if (currSize == capacity)
         {
-            int temp[2 * capacity];
+            cout << "DOUBLING SIZEEEEE" << endl;
+            int *temp = new int(2 * capacity);
             for (int i = 0; i < capacity; i++)
             {
-                temp[i] = A[i];
-                // everything copied to temp array
+                temp[i] = a[i];
             }
-            free(A);
-            A = temp; // temp array becomes new array
+            free(a);
+            a = temp;
             capacity = 2 * capacity;
         }
     }
 
+public:
     DynamicArray()
     {
-        A = new int[1]; // size of 1;
+        a = new int(1);
         currSize = 0;
         capacity = 1;
     }
@@ -37,36 +38,30 @@ public:
         {
             resizeArray();
         }
-        A[currSize] = x;
+        a[currSize] = x;
         currSize++;
     }
 
-    void deleteAtEnd()
-    {
-        if (currSize == 0)
-        {
-            cout << "DYNAMIC ARRAY IS EMPTY" << endl;
-            return;
-        }
-        else
-        {
-            A[currSize - 1] = INT_MIN;
-            currSize = currSize - 1;
-        }
-    }
-
-    int getSize()
+    int getArraySize()
     {
         return currSize;
+    }
+
+    int getCapacity()
+    {
+        return capacity;
     }
 };
 
 int main()
 {
-    DynamicArray a = new DynamicArray();
-    cout << "SIZE:" << a.getSize();
-    a.insertAtEnd(12);
-    a.insertAtEnd(13);
-    a.insertAtEnd(14);
-    cout << "SIZE:" << a.getSize();
+    DynamicArray a;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        a.insertAtEnd(i);
+        cout << "Curr Size: " << a.getArraySize() << endl;
+        cout << "Capacity: " << a.getCapacity() << endl;
+    }
 }
