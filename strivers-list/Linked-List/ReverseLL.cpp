@@ -23,3 +23,14 @@ public:
         return prev;
     }
 };
+
+// recursively
+if (!head || !head->next)
+{
+    return head;
+}
+ListNode *finalHead = reverseList(head->next);
+ListNode *temp = head->next;
+temp->next = head;
+head->next = NULL;
+return finalHead;
