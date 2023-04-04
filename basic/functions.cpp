@@ -94,28 +94,28 @@ using namespace std;
 
 // pascal triangle (BINARY COEFFEICIENT TABLE)
 
-// int factorial(int n)
-// {
-//     int fact = 1;
-//     for (int i = n; i > 1; i--)
-//     {
-//         fact = fact * i;
-//     }
-//     return fact;
-// }
-// int main()
-// {
-//     int n;
-//     cin >> n;
-//     for (int i = 0; i < n; i++)
-//     {
-//         for (int j = 0; j <= i; j++)
-//         {
-//             cout << factorial(i) / (factorial(j) * factorial(i - j)) << " ";
-//         }
-//         cout << endl;
-//     }
-// }
+int factorial(int n)
+{
+    int fact = 1;
+    for (int i = n; i > 1; i--)
+    {
+        fact = fact * i;
+    }
+    return fact;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            cout << factorial(i) / (factorial(j) * factorial(i - j)) << " ";
+        }
+        cout << endl;
+    }
+}
 
 // Sum of first n natural numbers
 // sum = n(n+1) / 2 .. so if n is 4, then sum till 4 is 1+2+3+4 = 10 or 4*5/2
@@ -301,102 +301,102 @@ using namespace std;
 // }
 
 /// Adding of 2 binary numbers
-int reverse(int n)
-{
-    int ans = 0, rem;
-    while (n > 0)
-    {
-        rem = n % 10;
-        ans = ans * 10 + rem;
-        n = n / 10;
-    }
-    return ans;
-}
-int addBinaryNumber(int n1, int n2)
-{
-    int ans = 0;
-    int previousCarry = 0;
-    while (n1 > 0 && n2 > 0)
-    {
-        if (n1 % 2 == 0 && n2 % 2 == 0)
-        {
-            ans = ans * 10 + previousCarry;
-            previousCarry = 0;
-        }
-        else if ((n1 % 2 == 1 && n2 % 2 == 0) || (n1 % 2 == 0 && n2 % 2 == 1))
-        {
-            if (previousCarry == 1)
-            {
-                ans = ans * 10 + 0;
-                previousCarry = 1;
-            }
-            else
-            {
-                ans = ans * 10 + 1;
-                previousCarry = 0;
-            }
-        }
-        else
-        {
-            ans = ans * 10 + previousCarry;
-            previousCarry = 1;
-        }
-        n1 /= 10;
-        n2 /= 10;
-    }
-    while (n1 > 0)
-    {
-        if (previousCarry == 1)
-        {
-            if (n1 % 2 == 1)
-            {
-                ans = ans * 10 + 0;
-                previousCarry = 1;
-            }
-            else
-            {
-                ans = ans * 10 + 1;
-                previousCarry = 0;
-            }
-        }
-        else
-        {
-            ans = ans * 10 + (n1 % 2);
-        }
-    }
-    n1 /= 10;
-    while (n2 > 0)
-    {
-        if (previousCarry == 1)
-        {
-            if (n2 % 2 == 1)
-            {
-                ans = ans * 10 + 0;
-                previousCarry = 1;
-            }
-            else
-            {
-                ans = ans * 10 + 1;
-                previousCarry = 0;
-            }
-        }
-        else
-        {
-            ans = ans * 10 + (n2 % 2);
-        }
-    }
-    n2 /= 10;
+// int reverse(int n)
+// {
+//     int ans = 0, rem;
+//     while (n > 0)
+//     {
+//         rem = n % 10;
+//         ans = ans * 10 + rem;
+//         n = n / 10;
+//     }
+//     return ans;
+// }
+// int addBinaryNumber(int n1, int n2)
+// {
+//     int ans = 0;
+//     int previousCarry = 0;
+//     while (n1 > 0 && n2 > 0)
+//     {
+//         if (n1 % 2 == 0 && n2 % 2 == 0)
+//         {
+//             ans = ans * 10 + previousCarry;
+//             previousCarry = 0;
+//         }
+//         else if ((n1 % 2 == 1 && n2 % 2 == 0) || (n1 % 2 == 0 && n2 % 2 == 1))
+//         {
+//             if (previousCarry == 1)
+//             {
+//                 ans = ans * 10 + 0;
+//                 previousCarry = 1;
+//             }
+//             else
+//             {
+//                 ans = ans * 10 + 1;
+//                 previousCarry = 0;
+//             }
+//         }
+//         else
+//         {
+//             ans = ans * 10 + previousCarry;
+//             previousCarry = 1;
+//         }
+//         n1 /= 10;
+//         n2 /= 10;
+//     }
+//     while (n1 > 0)
+//     {
+//         if (previousCarry == 1)
+//         {
+//             if (n1 % 2 == 1)
+//             {
+//                 ans = ans * 10 + 0;
+//                 previousCarry = 1;
+//             }
+//             else
+//             {
+//                 ans = ans * 10 + 1;
+//                 previousCarry = 0;
+//             }
+//         }
+//         else
+//         {
+//             ans = ans * 10 + (n1 % 2);
+//         }
+//     }
+//     n1 /= 10;
+//     while (n2 > 0)
+//     {
+//         if (previousCarry == 1)
+//         {
+//             if (n2 % 2 == 1)
+//             {
+//                 ans = ans * 10 + 0;
+//                 previousCarry = 1;
+//             }
+//             else
+//             {
+//                 ans = ans * 10 + 1;
+//                 previousCarry = 0;
+//             }
+//         }
+//         else
+//         {
+//             ans = ans * 10 + (n2 % 2);
+//         }
+//     }
+//     n2 /= 10;
 
-    if (previousCarry == 1)
-    {
-        ans = ans * 10 + 1;
-    }
-    ans = reverse(ans);
-    return ans;
-}
-int main()
-{
-    int n1, n2;
-    cin >> n1 >> n2;
-    cout << addBinaryNumber(n1, n2) << endl;
-}
+//     if (previousCarry == 1)
+//     {
+//         ans = ans * 10 + 1;
+//     }
+//     ans = reverse(ans);
+//     return ans;
+// }
+// int main()
+// {
+//     int n1, n2;
+//     cin >> n1 >> n2;
+//     cout << addBinaryNumber(n1, n2) << endl;
+// }

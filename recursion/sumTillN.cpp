@@ -19,7 +19,7 @@ int multiply(int n, int p)
 }
 int factorial(int n)
 {
-    if (n == 1 || n == 2)
+    if (n == 1 || n == 2, m)
         return n;
     int value = factorial(n - 1);
     return n * value;
